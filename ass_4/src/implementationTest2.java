@@ -1,75 +1,66 @@
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class implementationTest2 {
-
+    ArrayList<person> arr;
+    implementation imp = new implementation();
+    {
+        try {
+            arr = person.readFile("ass_4/src/data.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Test
     public void getOldestPeople() {
-        implementation imp = new implementation();
-        ArrayList<person> alp = imp.getOldestPeople();
-        assertEquals(alp.size(),14);
-        assertEquals(alp.get(0).getFirstName(),"david");
-        assertEquals(alp.get(2).getLastName(),"mouer");
-        assertEquals(alp.get(5).getAge(),30);
-        assertEquals(alp.get(8).getFirstName(),"michael");
+        ArrayList<person> alp = imp.getOldestPeople(arr);
+        assertEquals(5,alp.size());
+        assertEquals("Joseph",alp.get(0).getFirstName());
+        assertEquals("noga",alp.get(2).getLastName());
+        assertEquals(44,alp.get(4).getAge());
     }
 
     @Test
     public void getYoungestPeople() {
-        implementation imp = new implementation();
-        ArrayList<person> alp = imp.getYoungestPeople();
-        System.out.println(alp.size());
-        if(alp.size() > 20){
-            assertEquals(alp.get(0).getFirstName(),"david");
-            assertEquals(alp.get(15).getLastName(),"pagh");
-            assertEquals(alp.get(10).getAge(),0);
-            assertEquals(alp.get(5).getFirstName(),"marco");
-        }else{
-            assertEquals(alp.size(),42);
-        }
+        ArrayList<person> alp = imp.getYoungestPeople(arr);
+        assertEquals(3,alp.size());
+        assertEquals("david",alp.get(0).getFirstName());
+        assertEquals("mouer",alp.get(1).getLastName());
+        assertEquals(0,alp.get(2).getAge());
     }
 
     @Test
     public void sortByLastName() {
-        implementation imp = new implementation();
-        ArrayList<person> alp = imp.sortByLastName();
-        if(alp.size() > 1000){
-            assertEquals(alp.get(0).getFirstName(),"david");
-            assertEquals(alp.get(0).getLastName(),"blum");
-            assertEquals(alp.get(100).getAge(),4);
-            assertEquals(alp.get(1000).getFirstName(),"alex");
-            assertEquals(alp.get(1000).getLastName(),"noga");
-
-        }else{
-            assertEquals(alp.size(),1176);
-        }
+        ArrayList<person> alp = imp.sortByLastName(arr);
+        assertEquals(500,alp.size());
+        assertEquals("marco",alp.get(0).getFirstName());
+        assertEquals("pagh",alp.get(499).getLastName());
+        assertEquals(18,alp.get(200).getAge(),4);
     }
 
     @Test
     public void sortByAge() {
-        implementation imp = new implementation();
-        ArrayList<person> alp = imp.sortByAge();
-        if(alp.size() > 1000){
-            assertEquals(alp.get(0).getFirstName(),"david");
-            assertEquals(alp.get(0).getLastName(),"pagh");
-            assertEquals(alp.get(78).getAge(),1);
-            assertEquals(alp.get(112).getFirstName(),"kasper");
-            assertEquals(alp.get(785).getLastName(),"noga");
-
-        }else{
-            assertEquals(alp.size(),1176);
-        }
+        ArrayList<person> alp = imp.sortByAge(arr);
+        assertEquals(alp.size(),500);
+        assertEquals("david",alp.get(0).getFirstName());
+        assertEquals("pagh",alp.get(499).getLastName());
+        assertEquals(20,alp.get(300).getAge());
     }
 
     @Test
     public void getAverageAge() {
-        implementation imp = new implementation();
-        assertEquals(imp.getAverageAge(100,200),10);
-        assertEquals(imp.getAverageAge(0,1000),10);
-        assertEquals(imp.getAverageAge(1000,200),11);
-        assertEquals(imp.getAverageAge(10,15),3);
+
+        assertEquals(18.50,imp.getAverageAge(arr,-1,2));
+        System.out.println(imp.getAverageAge(arr,0,499));
+        assertEquals(18.50,imp.getAverageAge(arr,-100,550));
+        assertEquals(14.74,imp.getAverageAge(arr,450,100));
+        assertEquals(imp.getAverageAge(arr,1000,200),11);
+        assertEquals(imp.getAverageAge(arr,10,0),3);
     }
 
     @Test

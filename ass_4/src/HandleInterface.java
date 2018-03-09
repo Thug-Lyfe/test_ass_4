@@ -6,23 +6,23 @@ public interface HandleInterface {
     //ArrayList<person> arr = person.generateData();
 
     //return a list of all the oldest people from the data set.
-    public ArrayList<person> getOldestPeople();
+    public ArrayList<person> getOldestPeople(ArrayList<person> people);
 
     //return a list of all the youngest people from the data set.
-    public ArrayList<person> getYoungestPeople();
+    public ArrayList<person> getYoungestPeople(ArrayList<person> people);
 
     //sort the data set by last name.
-    public ArrayList<person> sortByLastName();
+    public ArrayList<person> sortByLastName(ArrayList<person> people);
 
     //sort the data set by age.
-    public ArrayList<person> sortByAge();
+    public ArrayList<person> sortByAge(ArrayList<person> people);
 
     //calculate the average age of the "number" of people starting from index start.
     // getAverageAge(100,200) -> 10
     // getAverageAge(0,1000) -> 10
     // getAverageAge(1000,200) -> 11
     // getAverageAge(10,15) -> 3
-    public int getAverageAge(int start,int number);
+    public double getAverageAge(ArrayList<person> people, int start,int number);
 
     // feed it a radius and return the area of the circle with said radius.
     // it can't have more than 2 decimals

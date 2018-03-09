@@ -9,8 +9,6 @@ public class fileMaker {
     public static void main(String[] args) throws IOException {
         implementation imp = new implementation();
         person.readFile("src/data.txt");
-
-        System.out.println(imp.getOldestPeople().get(0).toString());
         generateData();
 
     }
@@ -22,7 +20,7 @@ public class fileMaker {
 
         PrintWriter writer = new PrintWriter("src/data.txt", "UTF-8");
         Random ran = new Random();
-writer.println("First Name#;Last Name#;Hair Color#;Age");
+        writer.println("First Name#;Last Name#;Hair Color#;Age");
         for (int i1= 0;i1<500;i1++){
             writer.println(firstN[ran.nextInt(firstN.length)]+"#;"+
                     lastN[ran.nextInt(lastN.length)]+"#;"+

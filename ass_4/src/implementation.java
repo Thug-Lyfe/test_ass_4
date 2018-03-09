@@ -5,79 +5,86 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 
 public class implementation implements HandleInterface {
-    ArrayList<person> arr = person.generateData();
-
 
     @Override
-    public ArrayList<person> getOldestPeople() {
-        ArrayList<person> oldest = new ArrayList<person>();
+    public ArrayList<person> getOldestPeople(ArrayList<person> people) {
+        ArrayList<person> oldest = new ArrayList();
         int currentAge = 0;
-        for (int i = 0; i < arr.size(); i++) {
-            person cp = arr.get(i);
+        for (int i = 0; i < people.size(); i++) {
+            person cp = people.get(i);
             if (cp.getAge() > currentAge) {
                 oldest = new ArrayList<person>();
-                oldest.add(arr.get(i));
+                oldest.add(people.get(i));
                 currentAge = cp.getAge();
             } else if (cp.getAge() == currentAge) {
-                oldest.add(arr.get(i));
+                oldest.add(people.get(i));
             }
         }
         return oldest;
     }
 
     @Override
-    public ArrayList<person> getYoungestPeople() {
-        ArrayList<person> youngest = new ArrayList<person>();
+    public ArrayList<person> getYoungestPeople(ArrayList<person> people) {
+        ArrayList<person> youngest = new ArrayList();
         int currentAge = 100;
-        for (int i = 0; i < arr.size(); i++) {
-            person cp = arr.get(i);
+        for (int i = 0; i < people.size(); i++) {
+            person cp = people.get(i);
             if (cp.getAge() < currentAge) {
                 youngest = new ArrayList<person>();
-                youngest.add(arr.get(i));
+                youngest.add(people.get(i));
                 currentAge = cp.getAge();
             } else if (cp.getAge() == currentAge) {
-                youngest.add(arr.get(i));
+                youngest.add(people.get(i));
             }
         }
         return youngest;
     }
 
     @Override
-    public ArrayList<person> sortByLastName() {
-        ArrayList<person> sorted = arr;
-        Collections.sort(sorted, new Comparator<person>() {
+    public ArrayList<person> sortByLastName(ArrayList<person> people) {
+
+        Collections.sort(people, new Comparator<person>() {
             public int compare(person o1, person o2) {
                 return o1.getLastName().compareTo(o2.getLastName());
             }
         });
-        return sorted;
+        return people;
     }
 
     @Override
-    public ArrayList<person> sortByAge() {
-        ArrayList<person> sorted = arr;
-        Collections.sort(sorted, new Comparator<person>() {
+    public ArrayList<person> sortByAge(ArrayList<person> people) {
+
+        Collections.sort(people, new Comparator<person>() {
             public int compare(person o1, person o2) {
 
                 return o1.getAge() - o2.getAge();
             }
         });
-        return sorted;
+        return people;
     }
 
     @Override
-    public int getAverageAge(int start,int number) {
+    public double getAverageAge(ArrayList<person> people,int start,int number) {
         int sum = 0;
-        int temp = 0;
+        if(start < 0){
+            start = 0;
+        }
+        if(number == 0){
+            return 0;
+        }
+        if(number+start > people.size()){
+            number = number+start-people.size();
+        }
         for (int i = start; i < start+number; i++) {
-            if(i < arr.size()) {
-                sum += arr.get(i).getAge();
-            }else{
-                temp++;
+            if(i < people.size()) {
+                sum += people.get(i).getAge();
+            }else {
+
+                break;
             }
         }
-        System.out.println(number+"  :  "+temp);
-        return sum / (number-temp);
+        System.out.println(number+"  :  "+start);
+        return Math.floor(sum*100 /(number))/100;
     }
 
     @Override
