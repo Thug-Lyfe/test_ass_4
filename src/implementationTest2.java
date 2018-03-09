@@ -10,7 +10,7 @@ public class implementationTest2 {
     implementation imp = new implementation();
     {
         try {
-            arr = person.readFile("ass_4/src/data.txt");
+            arr = person.readFile("src/data.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
