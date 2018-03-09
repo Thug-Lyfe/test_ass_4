@@ -57,10 +57,10 @@ public class implementationTest2 {
 
         assertEquals(18.50,imp.getAverageAge(arr,-1,2));
         System.out.println(imp.getAverageAge(arr,0,499));
-        assertEquals(18.50,imp.getAverageAge(arr,-100,550));
+        assertEquals(19.66,imp.getAverageAge(arr,-100,550));
         assertEquals(14.74,imp.getAverageAge(arr,450,100));
-        assertEquals(imp.getAverageAge(arr,1000,200),11);
-        assertEquals(imp.getAverageAge(arr,10,0),3);
+        assertEquals(0,imp.getAverageAge(arr,1000,200));
+        assertEquals(0,imp.getAverageAge(arr,10,0));
     }
 
     @Test
